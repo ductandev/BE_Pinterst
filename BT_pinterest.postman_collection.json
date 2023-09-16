@@ -432,14 +432,16 @@
 					]
 				},
 				"url": {
-					"raw": "{{domain}}/api/user/upload-img",
+					"raw": "{{domain}}/api/user/upload-img/6/hình đẹp",
 					"host": [
 						"{{domain}}"
 					],
 					"path": [
 						"api",
 						"user",
-						"upload-img"
+						"upload-img",
+						"6",
+						"hình đẹp"
 					]
 				}
 			},
