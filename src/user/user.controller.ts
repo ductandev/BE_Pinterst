@@ -8,7 +8,7 @@ import { FileUploadDto } from './dto/upload.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { UserSignUpType } from 'src/auth/entities/auth.entity';
 import { Response } from 'express';
-import { UserComment } from './entities/user.entity';
+import { UserCommentType } from './entities/user.entity';
 
 @ApiBearerAuth()        // Hiện ổ khóa trên swagger
 @UseGuards(AuthGuard("jwt"))
@@ -44,7 +44,7 @@ export class UserController {
   // ==============================================
   @HttpCode(200)
   @Get("get-info-img-&-info-user-by-img-id/:imgID")
-  getInfoImgAndInfoUserById(@Param("imgID") imgID:string, @Res() res:Response){
+  getInfoImgAndInfoUserById(@Param("imgID") imgID: string, @Res() res: Response) {
     return this.userService.getInfoImgAndInfoUserById(imgID, res)
   }
 
@@ -53,7 +53,7 @@ export class UserController {
   // ==============================================
   @HttpCode(200)
   @Get("get-info-comment-by-img-id/:imgID")
-  getInfoCommentByImgId(@Param("imgID") imgID:string, @Res() res:Response){
+  getInfoCommentByImgId(@Param("imgID") imgID: string, @Res() res: Response) {
     return this.userService.getInfoCommentByImgId(imgID, res)
   }
 
@@ -63,7 +63,7 @@ export class UserController {
   // ==============================================
   @HttpCode(200)
   @Get("get-info-save-img-by-img-id/:imgID")
-  getInfoSaveImgByImgId(@Param("imgID") imgID:string, @Res() res:Response){
+  getInfoSaveImgByImgId(@Param("imgID") imgID: string, @Res() res: Response) {
     return this.userService.getInfoSaveImgByImgId(imgID, res)
   }
 
@@ -73,7 +73,7 @@ export class UserController {
   // ===========================================================
   @HttpCode(200)
   @Post("post-info-comment-and-img")
-  postCommentImg(@Body() body: UserComment, @Res() res:Response){
+  postCommentImg(@Body() body: UserCommentType, @Res() res: Response) {
     return this.userService.postCommentImg(body, res)
   }
 
@@ -131,7 +131,7 @@ export class UserController {
   @ApiConsumes('multipart/form-data')
   @ApiBody({ type: FileUploadDto })
   @HttpCode(201)
-  @Post("upload-img")
+  @Post("upload-img/:userID/:desc")
   @UseInterceptors(FileInterceptor("hinhAnh",     // Tham số 1: key FE gửi lên
     {                                             // Tham số 2: định nghĩa nơi lưu, và lưu tên mới cho file
       storage: diskStorage({
@@ -140,9 +140,13 @@ export class UserController {
       })
     }
   ))    // Sử dụng một middleware, cho phép chèn phía trước khi truy cập API
-  uploadImg(@UploadedFile() file: Express.Multer.File, @Res() res: Response) {
+  uploadImg(
+    @UploadedFile() file: Express.Multer.File,
+    @Param("userID") userID: string,
+    @Param("desc") desc: string,
+    @Res() res: Response) {
 
-    return this.userService.uploadImg(file, res)
+    return this.userService.uploadImg(file, userID, desc, res)
   }
 
 

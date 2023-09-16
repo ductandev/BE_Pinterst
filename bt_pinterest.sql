@@ -29,7 +29,7 @@ CREATE TABLE `hinh_anh` (
   PRIMARY KEY (`hinh_id`),
   KEY `nguoi_dung_id` (`nguoi_dung_id`),
   CONSTRAINT `hinh_anh_ibfk_1` FOREIGN KEY (`nguoi_dung_id`) REFERENCES `nguoi_dung` (`nguoi_dung_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `luu_anh` (
   `nguoi_dung_id` int NOT NULL,
@@ -74,7 +74,8 @@ INSERT INTO `hinh_anh` (`hinh_id`, `ten_hinh`, `duong_dan`, `mo_ta`, `nguoi_dung
 (3, 'Hình 3', 'duongdanhinhanh3.jpg', 'Mô tả hình 3', 3);
 INSERT INTO `hinh_anh` (`hinh_id`, `ten_hinh`, `duong_dan`, `mo_ta`, `nguoi_dung_id`) VALUES
 (4, 'Hình 4', 'duongdanhinhanh4.jpg', 'Mô tả hình 4', 4),
-(5, 'Hình 5', 'duongdanhinhanh5.jpg', 'Mô tả hình 5', 5);
+(5, 'Hình 5', 'duongdanhinhanh5.jpg', 'Mô tả hình 5', 5),
+(11, '1694877683982_Box.jpg', 'C:\\Users\\Admin\\Desktop\\Cybersoft\\NodeJS33\\7_bt_printerest/public/img/1694877683982_Box.jpg', 'hình đẹp', 6);
 
 INSERT INTO `luu_anh` (`nguoi_dung_id`, `hinh_id`, `ngay_luu`) VALUES
 (1, 1, '2023-09-06');
@@ -84,7 +85,8 @@ INSERT INTO `luu_anh` (`nguoi_dung_id`, `hinh_id`, `ngay_luu`) VALUES
 (3, 3, '2023-09-08');
 INSERT INTO `luu_anh` (`nguoi_dung_id`, `hinh_id`, `ngay_luu`) VALUES
 (4, 4, '2023-09-09'),
-(5, 5, '2023-09-10');
+(5, 5, '2023-09-10'),
+(6, 11, '2023-09-16');
 
 INSERT INTO `nguoi_dung` (`nguoi_dung_id`, `email`, `mat_khau`, `ho_ten`, `tuoi`, `anh_dai_dien`) VALUES
 (1, 'nguoidung1@gmail.com', '$2b$10$9H5pWFDbCAKBN0HL33Eti.9qMRzxTIuiPxsbI.peTyHzXFnNFyZVi', 'Người Dùng 1', 25, 'duongdananh1.jpg');
@@ -95,7 +97,7 @@ INSERT INTO `nguoi_dung` (`nguoi_dung_id`, `email`, `mat_khau`, `ho_ten`, `tuoi`
 INSERT INTO `nguoi_dung` (`nguoi_dung_id`, `email`, `mat_khau`, `ho_ten`, `tuoi`, `anh_dai_dien`) VALUES
 (4, 'nguoidung4@gmail.com', '$2b$10$9H5pWFDbCAKBN0HL33Eti.9qMRzxTIuiPxsbI.peTyHzXFnNFyZVi', 'Người Dùng 4', 22, 'duongdananh4.jpg'),
 (5, 'nguoidung5@gmail.com', '$2b$10$9H5pWFDbCAKBN0HL33Eti.9qMRzxTIuiPxsbI.peTyHzXFnNFyZVi', 'Người Dùng 5', 35, 'duongdananh5.jpg'),
-(6, 'nguoidung6@gmail.com', '$2b$10$5BqHQ0dBDPgXolWGE7ggyuzt8CTMss3onCrqq8DpVvIJAZvhFMUjO', 'NguyenDuctannnn', 30, '');
+(6, 'nguoidung6@gmail.com', '$2b$10$5BqHQ0dBDPgXolWGE7ggyuzt8CTMss3onCrqq8DpVvIJAZvhFMUjO', 'NguyenDuctannnn', 30, 'duongdananh6.jpg');
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

@@ -7,7 +7,8 @@ import { errorCode, failCode, successCode } from 'src/Config/response';
 // THƯ VIỆN MÃ HÓA PASSWORD
 // yarn add bcrypt
 import * as bcrypt from 'bcrypt';
-import { UserComment } from './entities/user.entity';
+import { UserCommentType, UserImgType, UserSaveImgType } from './entities/user.entity';
+import * as fs from 'fs';
 
 @Injectable()
 export class UserService {
@@ -23,8 +24,8 @@ export class UserService {
     try {
       let data = await this.model.hinh_anh.findMany()
 
-      if(data === null){
-        return failCode(res,'',400,"Chưa có ảnh nào được thêm vào dữ liệu ảnh !")
+      if (data === null) {
+        return failCode(res, '', 400, "Chưa có ảnh nào được thêm vào dữ liệu ảnh !")
       }
 
       successCode(res, data, 200, "Thành công !")
@@ -140,7 +141,7 @@ export class UserService {
   // ===========================================================
   // POST ĐỂ LƯU THÔNG TIN BÌNH LUẬN CỦA NGƯỜI DÙNG VỚI HÌNH ẢNH.
   // ===========================================================
-  async postCommentImg(body: UserComment, res: Response) {
+  async postCommentImg(body: UserCommentType, res: Response) {
     try {
       let { nguoi_dung_id, hinh_id, ngay_binh_luan, noi_dung } = body;
 
@@ -241,7 +242,7 @@ export class UserService {
       successCode(res, data, 200, "Thành công !")
     }
     catch (exception) {
-      console.log("🚀 ~ file: user.service.ts:127 ~ UserService ~ getListImgSaveByUserId ~ exception:", exception)
+      console.log("🚀 ~ file: user.service.ts:245 ~ UserService ~ getListImgSaveByUserId ~ exception:", exception)
       errorCode(res, "Lỗi BE")
     }
   }
@@ -267,7 +268,7 @@ export class UserService {
       successCode(res, data, 200, "Thành công !")
     }
     catch (exception) {
-      console.log("🚀 ~ file: user.service.ts:270 ~ UserService ~ getListImgCreateByUserId ~ exception:", exception)
+      console.log("🚀 ~ file: user.service.ts:271 ~ UserService ~ getListImgCreateByUserId ~ exception:", exception)
       errorCode(res, "Lỗi BE")
     }
   }
@@ -311,7 +312,7 @@ export class UserService {
       successCode(res, data, 200, "Xóa ảnh thành công !")
     }
     catch (exception) {
-      console.log("🚀 ~ file: user.service.ts:314 ~ UserService ~ deleteImgCreateByUserId ~ exception:", exception)
+      console.log("🚀 ~ file: user.service.ts:315 ~ UserService ~ deleteImgCreateByUserId ~ exception:", exception)
       errorCode(res, "Lỗi BE")
     }
   }
@@ -320,12 +321,46 @@ export class UserService {
   // ========================================
   //      POST THÊM 1 ẢNH CỦA USER
   // ========================================
-  async uploadImg(file: Express.Multer.File, res: Response) {
+  async uploadImg(file: Express.Multer.File, userID: string, desc: string, res: Response) {
     try {
+      let checkUserID = await this.model.nguoi_dung.findFirst({
+        where: {
+          nguoi_dung_id: +userID
+        },
+      });
+
+      if (checkUserID === null) {
+        fs.unlink(process.cwd() + "/public/img/" + file.filename, (err) => {    // xóa file ảnh theo đường dẫn nếu người dùng ko tồn tại
+          if (err) {
+            console.error("Error deleting file:", err);
+          }
+        });
+
+        return failCode(res, '', 400, "Người dùng không tồn tại !")
+      }
+
+      const createdImage = await this.model.hinh_anh.create({
+        data: {
+          ten_hinh: file.filename,
+          duong_dan: process.cwd() + "/public/img/" + file.filename,
+          mo_ta: desc,
+          nguoi_dung_id: +userID
+        }
+      });
+
+      let newData: UserSaveImgType = {
+        nguoi_dung_id: +userID,
+        hinh_id: createdImage.hinh_id, // Lấy hinh_id từ bản ghi vừa tạo
+        ngay_luu: new Date()
+      }
+      await this.model.luu_anh.create({
+        data: newData
+      })
+
       successCode(res, file, 201, 'Thêm ảnh thành công !');
     }
     catch (exception) {
-      console.log('🚀 ~ file: user.service.ts:328 ~ UserService ~ uploadImg ~ exception:', exception,);
+      console.log('🚀 ~ file: user.service.ts:363 ~ UserService ~ uploadImg ~ exception:', exception,);
       errorCode(res, 'Lỗi BE !');
     }
   }

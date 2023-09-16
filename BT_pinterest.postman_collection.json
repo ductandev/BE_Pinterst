@@ -407,7 +407,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5ndW9pX2R1bmdfaWQiOjYsImVtYWlsIjoibmd1b2lkdW5nNkBnbWFpbC5jb20iLCJtYXRfa2hhdSI6IiQyYiQxMCR1SS94bFhjZVV0VGwwLlYzU3BwbmxlbU81QzJZTTNzbVdUWkIvbGdRQW95TVUuYTZ3YVhveSIsImhvX3RlbiI6Ik5ndXllbkR1Y3RhbiIsInR1b2kiOjIwLCJhbmhfZGFpX2RpZW4iOiIifSwiaWF0IjoxNjk0NTc2MDcyLCJleHAiOjE2OTQ2ODQwNzJ9.GEesE6fCYEWUEtWwWe0CX8rT3kqqBQsthfwmwJgjLLY",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5ndW9pX2R1bmdfaWQiOjYsImVtYWlsIjoibmd1b2lkdW5nNkBnbWFpbC5jb20iLCJtYXRfa2hhdSI6IiQyYiQxMCQ1QnFIUTBkQkRQZ1hvbFdHRTdnZ3l1enQ4Q1RNc3Mzb25DcnFxOERwVnZJSkFadmhGTVVqTyIsImhvX3RlbiI6Ik5ndXllbkR1Y3Rhbm5ubiIsInR1b2kiOjMwLCJhbmhfZGFpX2RpZW4iOiIifSwiaWF0IjoxNjk0ODY5NjcxLCJleHAiOjE2OTQ5Nzc2NzF9.lUY2vTU8HiUOL472MAm7kNwBMrDu3QRnGFVhZ6rBw3A",
 							"type": "string"
 						}
 					]
