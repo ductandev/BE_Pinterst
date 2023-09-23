@@ -12,6 +12,9 @@ COPY prisma ./prisma/
 
 RUN yarn prisma generate
 
+# Cấu hình cho FE sẹt đường dẫn
+# COPY nginx.conf /etc/nginx/nginx.conf
+
 COPY . .
 
 # quy định cứng cho port này bởi docker

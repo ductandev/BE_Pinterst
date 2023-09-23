@@ -9,6 +9,7 @@ import { errorCode, failCode, successCode } from 'src/Config/response';
 import * as bcrypt from 'bcrypt';
 import { UserCommentType, UserImgType, UserSaveImgType } from './entities/user.entity';
 import * as fs from 'fs';
+import { FileUploadDto } from './dto/upload.dto';
 
 @Injectable()
 export class UserService {
@@ -321,8 +322,10 @@ export class UserService {
   // ========================================
   //      POST THÊM 1 ẢNH CỦA USER
   // ========================================
-  async uploadImg(file: Express.Multer.File, userID: string, desc: string, res: Response) {
+  async uploadImg(file: Express.Multer.File, userID: string, body: FileUploadDto, res: Response) {
     try {
+      let {mo_ta} = body
+
       let checkUserID = await this.model.nguoi_dung.findFirst({
         where: {
           nguoi_dung_id: +userID
@@ -343,7 +346,7 @@ export class UserService {
         data: {
           ten_hinh: file.filename,
           duong_dan: process.cwd() + "/public/img/" + file.filename,
-          mo_ta: desc,
+          mo_ta,
           nguoi_dung_id: +userID
         }
       });

@@ -129,9 +129,9 @@ export class UserController {
   //      POST THÊM 1 ẢNH CỦA USER
   // ========================================
   @ApiConsumes('multipart/form-data')
-  @ApiBody({ type: FileUploadDto })
+  // @ApiBody({ type: FileUploadDto })
   @HttpCode(201)
-  @Post("upload-img/:userID/:desc")
+  @Post("upload-img/:userID")
   @UseInterceptors(FileInterceptor("hinhAnh",     // Tham số 1: key FE gửi lên
     {                                             // Tham số 2: định nghĩa nơi lưu, và lưu tên mới cho file
       storage: diskStorage({
@@ -143,10 +143,10 @@ export class UserController {
   uploadImg(
     @UploadedFile() file: Express.Multer.File,
     @Param("userID") userID: string,
-    @Param("desc") desc: string,
+    @Body() body: FileUploadDto,
     @Res() res: Response) {
 
-    return this.userService.uploadImg(file, userID, desc, res)
+    return this.userService.uploadImg(file, userID, body, res)
   }
 
 
