@@ -3,6 +3,9 @@ import { AppModule } from './app.module';
 import * as express from 'express'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+
+const port = 8080;
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({ origin: "*" }); // CORS() cho phép FE truy cập vào BE
@@ -14,7 +17,9 @@ async function bootstrap() {
   SwaggerModule.setup("swagger", app, document);                  // Nơi định nghĩa endpoint truy cập vào UI swagger || tham số 1: endpoint || tham số 2: app server BE
 
 
-  await app.listen(8080);
+  await app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}/swagger`)
+  });
 }
 bootstrap();
  
@@ -36,16 +41,22 @@ bootstrap();
 // nest g resource auth --no-spec
 
 
+// CÁCH KẾT NỐI VỚI CSDL
 // B1: yarn add prisma @prisma/client
 // B2: yarn prisma init
-// B3: sửa lại chuỗi kết nối và schema.prisma mục provider
+// B3: sửa lại chuỗi kết nối và schema.prisma mục provider và file ".env"
 // B4: yarn prisma db pull
 // B5: yarn prisma generate
 
 
+// Cài Multer
+// yarn add @types/multer
+
 // Cài swaager
 // yarn add @nestjs/swagger swagger-ui-express
 
-
 // Cài JWT
 // yarn add @nestjs/passport passport passport-local  @nestjs/jwt passport-jwt @types/passport-jwt
+
+// THƯ VIỆN MÃ HÓA PASSWORD
+// yarn add bcrypt

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Res } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param, Delete, HttpCode, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserSignInDto } from './dto/auth.dto';
 import { UserSignUpType } from './entities/auth.entity';
