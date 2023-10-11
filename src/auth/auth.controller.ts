@@ -24,3 +24,6 @@ export class AuthController {
       return this.authService.signUp(body, res);
   }
 }
+
+
+

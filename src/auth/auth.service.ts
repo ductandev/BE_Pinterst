@@ -33,8 +33,8 @@ export class AuthService {
         // check password
         let checkPass = bcrypt.compareSync(mat_khau, checkEmail.mat_khau);    //: tham số 1: dữ liệu chưa mã hóa, tham số 2: dữ liệu đã mã hóa
         if (checkPass == true) {
-          // ⭐ để 30h cho mentor dễ chấm bài⭐
-          let token = this.jwtService.sign({ data: checkEmail }, { expiresIn: '30h', secret: 'NODE' },); // Khóa bí mật bên files "jwt.strategy.ts"
+          // ⭐ để 30d cho mentor dễ chấm bài⭐
+          let token = this.jwtService.sign({ data: checkEmail }, { expiresIn: '30d', secret: 'NODE' },); // Khóa bí mật bên files "jwt.strategy.ts"
           successCode(res, token, 200, 'Login thành công !');
         } else {
           failCode(res, '', 400, 'Mật khẩu không đúng !');

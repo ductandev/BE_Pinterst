@@ -33,7 +33,7 @@ export class UserService {
     }
     catch (exception) {
       console.log("🚀 ~ file: user.service.ts:28 ~ UserService ~ getAllImg ~ exception:", exception)
-      errorCode(500, "Lỗi BE")
+      errorCode(res, "Lỗi BE")
     }
   }
 
@@ -53,7 +53,7 @@ export class UserService {
       successCode(res, data, 200, "Thành công !")
     }
     catch (exception) {
-      errorCode(500, "Lỗi BE")
+      errorCode(res, "Lỗi BE")
     }
   }
 
