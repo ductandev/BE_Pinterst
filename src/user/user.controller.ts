@@ -44,7 +44,7 @@ export class UserController {
     return this.userService.updateInfo(id, body, res)
   }
 
-  // TEST
+  // TESTTT
   // Cách lấy biến môi trường nestjs
   // @Get("/get-dotenv")
   // getEnv() {
