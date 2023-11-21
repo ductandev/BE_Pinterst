@@ -18,7 +18,7 @@ RUN yarn prisma generate
 COPY . .
 
 # quy định cứng cho port này bởi docker
-EXPOSE 8080             
+EXPOSE 8081             
 CMD ["yarn","start"]
 # CMD ["node","start"]
 
